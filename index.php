@@ -6,7 +6,7 @@ include("header.php");
 ?>
 
 <?php if($cronofy->access_token == "") { ?>
-<a class="btn btn-primary btn-success" href="/oauth/">
+<a class="btn btn-primary btn-success" href="oauth/">
   Login
 </a>
 <?php } else { ?>
