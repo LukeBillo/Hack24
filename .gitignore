@@ -1,1 +1,5 @@
 .idea/
+channels/calls
+enterprise_connect/users
+enterprise_connect/push/credentials.json
+log/debug.log
