@@ -10,6 +10,12 @@ if ($cronofy->access_token == "") {
 
 } else {
   echo '<a href="/profiles/">Account Profiles</a>
+<?php if($cronofy->access_token == "") { ?>
+<a class="btn btn-primary btn-success" href="oauth/">
+  Login
+</a>';
+} else {
+  <a href="/profiles/">Account Profiles</a>
   <br />
   <a href="/channels/">Channels</a>
   <br />
