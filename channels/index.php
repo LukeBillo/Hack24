@@ -3,9 +3,9 @@ include("../config.php");
 
 $channels = $cronofy->list_channels()["channels"];
 
-include("../header.php"); ?>
+include("../header.php");
 
-<div class="row">
+echo '<div class="row">
   <div class="col-xs-8">
     <h2>Channels</h2>
   </div>
@@ -25,23 +25,24 @@ include("../header.php"); ?>
     </tr>
   </thead>
 
-  <tbody>
-    <? for($i = 0; $i < count($channels); $i++){ ?>
-      <tr>
+  <tbody>';
+
+for($i = 0; $i < count($channels); $i++) {
+  echo '<tr>
+        <td>'
+      . $channels[$i]["channel_id"] .
+      '</td>
+        <td>'
+      . $channels[$i]["callback_url"] .
+      '</td>
         <td>
-          <?= $channels[$i]["channel_id"] ?>
-        </td>
-        <td>
-          <?= $channels[$i]["callback_url"] ?>
-        </td>
-        <td>
-          <a href="/channels/show.php?channelId=<?= $channels[$i]["channel_id"] ?>">
+          <a href="/channels/show.php?channelId=' . $channels[$i]["channel_id"] . '">
             View
           </a>
         </td>
-      </tr>
-      <? } ?>
-    </tbody>
-  </table>
+      </tr>';
+}
+    echo '</tbody>
+  </table>';
 
-<?php include("../footer.php"); ?>
+include("../footer.php"); ?>

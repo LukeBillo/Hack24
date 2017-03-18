@@ -19,23 +19,25 @@ if(!isset($profile)){
   die;
 }
 
-include("../header.php"); ?>
+include("../header.php");
 
-<h2><?= $profile["profile_name"] ?> - New Calendar</h2>
+echo '<h2>' . $profile["profile_name"] . '- New Calendar</h2>
 
-<div class="well">
-  <? if(isset($_GET['errors'])){ ?>
-    <div id="error_explanation" class="alert alert-danger">
-      <ul>
-        <? for($i = 0; $i < count($_GET['errors']); $i++){ ?>
-          <li><?= $_GET['errors'][$i] ?></li>
-        <? } ?>
-      </ul>
-    </div>
-  <? } ?>
+<div class="well">';
 
-  <form class="form-horizontal" action="/calendars/create.php" method="post">
-    <input type="hidden" value="<?= $profile["profile_id"] ?>" name="calendar[profile_id]" />
+if(isset($_GET['errors'])) {
+  echo '<div id="error_explanation" class="alert alert-danger"><ul>';
+
+  for ($i = 0; $i < count($_GET['errors']); $i++) {
+    echo '<li>' . $_GET['errors'][$i] . '</li>';
+  }
+
+  echo '</ul>
+    </div>';
+}
+
+echo '<form class="form-horizontal" action="/calendars/create.php" method="post">
+    <input type="hidden" value="' . $profile["profile_id"] . '" name="calendar[profile_id]" />
 
     <fieldset>
       <div class="form-group">
@@ -52,6 +54,6 @@ include("../header.php"); ?>
       </div>
     </fieldset>
   </form>
-</div>
+</div>';
 
-<?php include("../footer.php"); ?>
+include("../footer.php"); ?>

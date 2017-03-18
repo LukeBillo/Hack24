@@ -1,16 +1,15 @@
 <?php
 $GLOBALS['SKIP_AUTH'] = true;
-
 include("config.php");
 include("header.php");
-?>
 
-<?php if($cronofy->access_token == "") { ?>
-<a class="btn btn-primary btn-success" href="/oauth/">
-  Login
-</a>
-<?php } else { ?>
-  <a href="/profiles/">Account Profiles</a>
+if ($cronofy->access_token == "") {
+  echo '<a class="btn btn-primary btn-success" href="/oauth/">
+    Login
+  </a>';
+
+} else {
+  echo '<a href="/profiles/">Account Profiles</a>
   <br />
   <a href="/channels/">Channels</a>
   <br />
@@ -18,7 +17,7 @@ include("header.php");
   <br />
   <a href="/enterprise_connect/">Enterprise Connect</a>
   <br />
-  <a href="/availability/">Availability API</a>
-<?php } ?>
+  <a href="/availability/">Availability API</a>';
+}
 
-<?php include("footer.php"); ?>
+include("footer.php"); ?>

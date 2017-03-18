@@ -3,10 +3,14 @@
 class CronofyException extends Exception
 {
     private $error_details;
+    protected $message;
+    protected $code;
 
     public function __construct($message, $code, $error_details = null)
     {
         $this->error_details = $error_details;
+        $this->message = $message;
+        $this->code = $code;
 
         parent::__construct($message, $code, null);
     }
@@ -14,6 +18,16 @@ class CronofyException extends Exception
     public function error_details()
     {
         return $this->error_details;
+    }
+
+    public function message_details()
+    {
+        return $this->message;
+    }
+
+    public function code_details()
+    {
+        return $this->code;
     }
 }
 

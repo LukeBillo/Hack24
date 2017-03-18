@@ -18,12 +18,12 @@ for($i = 0; $i < count($calendars); $i++){
   array_push($profiles[$profileId]["calendars"], $calendars[$i]);
 }
 
-include("../header.php"); ?>
+include("../header.php");
 
-<h2>Calendars</h2>
+echo '<h2>Calendars</h2>';
 
-<? foreach($profiles as $profileId => $profile){ ?>
-  <div class="row">
+foreach($profiles as $profileId => $profile) {
+  echo '<div class="row">
     <div class="col-xs-8">
       <h3><?= $profile["profile_name"] ?></h3>
     </div>
@@ -43,22 +43,22 @@ include("../header.php"); ?>
       </tr>
     </thead>
 
-    <tbody>
-      <? for($j = 0; $j < count($profile["calendars"]); $j++){ ?>
-        <tr>
+    <tbody>';
+
+  for ($j = 0; $j < count($profile["calendars"]); $j++) {
+    echo '<tr>
           <td>
-            <?= $profile["calendars"][$j]["calendar_name"] ?>
-          </td>
+            ' . $profile["calendars"][$j]["calendar_name"] .
+          '</td>
           <td>
-            <a href="/calendars/show.php?calendarId=<?= $profile["calendars"][$j]["calendar_id"] ?>">
+            <a href="/calendars/show.php?calendarId=' . $profile["calendars"][$j]["calendar_id"] . '">
               View
             </a>
           </td>
         </tr>
-      <? } ?>
     </tbody>
-  </table>
-<? } ?>
+  </table>';
+  }
+}
 
-
-<?php include("../footer.php"); ?>
+include("../footer.php"); ?>
