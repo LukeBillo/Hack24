@@ -9,7 +9,9 @@ function DebugLog($log){
 $GLOBALS['CRONOFY_CLIENT_ID'] = "afOfaX6QGq_607W6z9BciK0n_mek8qhc";
 $GLOBALS['CRONOFY_CLIENT_SECRET'] = "6yOaLp-7SZyv1IyChYHvw2hoURL_v1hclM1-1RaTejb7y8RyZA4fIw07OdDbnXAig6Rxu3BINEerlEJsu0NSdg";
 
-$GLOBALS['DOMAIN'] = "http://c0818db7.ngrok.io";
+$GLOBALS['DOMAIN'] = "http://622241c7.ngrok.io";
+
+$GLOBALS['GOOGLE_MAPS_EMBED_API_KEY'] = "AIzaSyDCJW_tIEooCbLmjX27KubrcIsNYy3wrLA";
 
 if($GLOBALS['CRONOFY_CLIENT_ID'] == "" || $GLOBALS['CRONOFY_CLIENT_SECRET'] == "" || $GLOBALS['DOMAIN'] == ""){
   header('Location: /setup.php');

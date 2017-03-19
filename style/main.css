@@ -1,0 +1,29 @@
+body#home {
+  background-color: #66CEFF;
+  color: #FFFFFF; }
+  body#home h1, body#home img#cat, body#home form#login, body#home button#register {
+    position: relative;
+    margin: auto;
+    display: block; }
+
+div.container {
+  display: block; }
+
+img#cat {
+  position: relative;
+  margin: auto;
+  width: 500px;
+  height: 250px; }
+
+body#home > h1 {
+  text-align: center;
+  font-family: Liberation Sans; }
+
+form#login * {
+  text-align: center; }
+
+form#login input {
+  width: 500px;
+  margin: 10px; }
+
+/*# sourceMappingURL=main.css.map */

@@ -21,14 +21,14 @@ if(!isset($calendar)){
 
 $events = $cronofy->read_events(array("tzid" => "Etc/UTC", "include_managed" => true, "calendar_ids" => array($calendar["calendar_id"])));
 
-include("../header.php"); ?>
+include("../header.php");
 
-<div class="row">
+echo '<div class="row">
   <div class="col-xs-8">
 <h2><?= $calendar["calendar_name"] ?> - Events</h2>
 </div>
 <div class="col-xs-4 text-right">
-  <a href="/events/new.php?calendarId=<?= $calendar["calendar_id"] ?>" class="btn btn-primary">
+  <a href="/events/new.php?calendarId=' . $calendar["calendar_id"] . '" class="btn btn-primary">
     Create Event
   </a>
 </div>
@@ -43,26 +43,25 @@ include("../header.php"); ?>
     </tr>
   </thead>
 
-  <tbody>
-    <? foreach($events->each() as $event){ ?>
-    <tr>
+  <tbody>';
+
+foreach($events->each() as $event) {
+  echo '<tr>
+      <td>' . $event["summary"] .
+      '</td>
+      <td> ' . $event["start"] .
+      '</td>
+      <td>' . $event["end"] .
+      '</td>
       <td>
-        <?= $event["summary"] ?>
-      </td>
-      <td>
-        <?= $event["start"] ?>
-      </td>
-      <td>
-        <?= $event["end"] ?>
-      </td>
-      <td>
-        <a href="/events/show.php?calendarId=<?= $calendar["calendar_id"] ?>&eventUid=<?= $event["event_uid"] ?>">
+        <a href="/events/show.php?calendarId=' . $calendar["calendar_id"] . '&eventUid=' . $event["event_uid"] . '">
           View
         </a>
       </td>
-    </tr>
-    <? } ?>
-  </tbody>
-</table>
+    </tr>';
+}
 
-<?php include("../footer.php"); ?>
+echo '</tbody>
+</table>';
+
+include("../footer.php"); ?>

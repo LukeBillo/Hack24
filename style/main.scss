@@ -1,0 +1,36 @@
+@import "_variables.scss";
+
+body#home {
+  background-color: #66CEFF;
+  color: #FFFFFF;
+
+  h1, img#cat, form#login, button#register {
+    @include rel-horiz-center;
+    display: block;
+  }
+}
+
+div.container {
+  display: block;
+}
+
+img#cat {
+  @include rel-horiz-center;
+  width: 500px;
+  height: 250px;
+}
+
+body#home > h1 {
+  @include center-text;
+  font-family: Liberation Sans;
+}
+
+form#login * {
+  @include center-text;
+}
+
+form#login input {
+  width: 500px;
+  margin: 10px;
+}
+

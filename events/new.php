@@ -19,29 +19,32 @@ if(!isset($calendar)){
   die;
 }
 
-include("../header.php"); ?>
+include("../header.php");
 
-<h2><?= $calendar["calendar_name"] ?> - New Event</h2>
+echo '<h2>' . $calendar["calendar_name"] . ' - New Event</h2>
 
-<div class="well">
-  <? if(isset($_GET['errors'])){ ?>
-    <div id="error_explanation" class="alert alert-danger">
-      <ul>
-        <? for($i = 0; $i < count($_GET['errors']); $i++){ ?>
-          <li><?= $_GET['errors'][$i] ?></li>
-        <? } ?>
-      </ul>
-    </div>
-  <? } ?>
+<div class="well">';
 
-  <form class="form-horizontal" action="/events/create.php" method="post">
-    <input type="hidden" value="<?= $calendar["calendar_id"] ?>" name="event[calendar_id]" />
+if(isset($_GET['errors'])) {
+  echo '<div id="error_explanation" class="alert alert-danger">
+            <ul>';
+
+  for ($i = 0; $i < count($_GET['errors']); $i++) {
+    echo '<li>' . $_GET['errors'][$i] . '</li>';
+  }
+
+  echo '</ul>
+    </div>';
+}
+
+echo '<form class="form-horizontal" action="/events/create.php" method="post">
+    <input type="hidden" value="' . $calendar["calendar_id"] . '" name="event[calendar_id]" />
 
     <fieldset>
       <div class="form-group">
         <label class="control-label col-lg-2">Event ID</label>
         <div class="col-lg-10">
-          <input class="form-control" type="text" name="event[event_id]" value="unique_event_id_<?= mt_rand(1000000,9999999) ?>" />
+          <input class="form-control" type="text" name="event[event_id]" value="unique_event_id_' . mt_rand(1000000,9999999) . '" />
         </div>
       </div>
 
@@ -78,10 +81,10 @@ include("../header.php"); ?>
         <div class="col-lg-10">
           <input class="form-control" type="text" name="event[location][description]" />
         </div>
-      </div>
+      </div>';
       
-    <? if($calendar["provider_name"] == "apple" || $calendar["provider_name"] == "google"){ ?>
-      <div class="form-group">
+if($calendar["provider_name"] == "apple" || $calendar["provider_name"] == "google") {
+  echo '<div class="form-group">
         <label class="control-label col-lg-2">Latitude</label>
         <div class="col-lg-10">
           <input class="form-control" name="event[location][lat]" />
@@ -90,16 +93,16 @@ include("../header.php"); ?>
         <div class="col-lg-10">
           <input class="form-control" name="event[location][long]" />
         </div>
-      </div>
-    <? } ?>
+      </div>';
+}
 
-      <div class="form-group">
+echo '<div class="form-group">
         <div class="col-lg-10">
           <input type="submit" value="Create" class="btn btn-success btn-primary" />
         </div>
       </div>
     </fieldset>
   </form>
-</div>
+</div>';
 
-<?php include("../footer.php"); ?>
+ include("../footer.php"); ?>

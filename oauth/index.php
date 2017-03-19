@@ -24,8 +24,11 @@ if (!isset($_GET['code'])) {
 
     DebugLog("User OAuth successful");
   } catch(CronofyException $ex) {
-    DebugLog("User OAuth unsuccessful - " . print_r($ex->error_details(), true));
+    DebugLog("User OAuth unsuccessful - " . print_r($ex->error_details(), true) .
+        ", message: " . print_r($ex->message_details(), true) .
+        ", code: " . print_r($ex->code_details(), true) . ".");
   } finally {
     header('Location: ' . $GLOBALS['DOMAIN']);
   }
 }
+?>

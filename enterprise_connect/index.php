@@ -23,30 +23,29 @@ if($cronofy->access_token != ""){
 }
 
 include("../header.php");
-?>
 
-<div class="row">
+echo '<div class="row">
   <div class="col-xs-8">
     <h2>Enterprise Connect</h2>
-  </div>
+  </div>';
 
-<? if($cronofy->access_token != ""){ ?>
-  <div class="col-xs-4 text-right">
+if($cronofy->access_token != "") {
+  echo '<div class="col-xs-4 text-right">
     <a href="/enterprise_connect/new.php" class="btn btn-primary btn-success">
       Authorize User
     </a>
-  </div>
-<? } ?>
-</div>
+  </div>';
+}
 
-<? if($cronofy->access_token == ""){ ?>
-  <a class="btn btn-primary btn-success" href="/enterprise_connect/oauth/">
+echo '</div>';
+
+if($cronofy->access_token == ""){
+  echo '<a class="btn btn-primary btn-success" href="/enterprise_connect/oauth/">
     Log in with your Admin account
-  </a>
-<? } else {
+  </a>';
 
-?>
-  <h3>Resources</h3>
+} else {
+  echo '<h3>Resources</h3>
 
   <table class="table table-striped table-hover">
     <thead>
@@ -56,17 +55,20 @@ include("../header.php");
       </tr>
     </thead>
 
-    <tbody>
-      <? for($i = 0; $i < count($resources); $i++){ ?>
-        <tr>
-          <td><?= $resources[$i]["name"] ?></td>
-          <td><?= $resources[$i]["email"] ?></td>
-        </tr>
-      <? } ?>
-    </tbody>
-  </table>
+    <tbody>';
 
-  <h3>Users</h3>
+  for($i = 0; $i < count($resources); $i++) {
+    echo '<tr>
+            <td>' . $resources[$i]["name"] . '</td>
+            <td>' . $resources[$i]["email"] . '</td>
+          </tr>';
+  }
+  echo '</tbody>
+  </table>';
+}
+
+
+echo '<h3>Users</h3>
 
   <table class="table table-striped table-hover">
     <thead>
@@ -77,23 +79,27 @@ include("../header.php");
       </tr>
     </thead>
 
-    <tbody>
-      <? for($i = 0; $i < count($users); $i++){ ?>
-        <tr>
-          <td><?= $users[$i]["email"] ?></td>
-          <td><?= $users[$i]["status"] ?></td>
-          <td>
-            <? if($users[$i]["status"] == "Linked"){ ?>
-              <a href="/service_account_users/show.php?email=<?= $users[$i]["email"] ?>">
-                View
-              </a>
-            <? } ?>
-          </td>
-        </tr>
-      <? } ?>
-    </tbody>
-  </table>
-  <? }
+    <tbody>';
+
+for($i = 0; $i < count($users); $i++){
+  echo '<tr>
+          <td>' . $users[$i]["email"] . '</td>
+          <td>' . $users[$i]["status"] . '</td>
+          <td>';
+
+  if($users[$i]["status"] == "Linked") {
+    echo '<a href="/service_account_users/show.php?email=' . $users[$i]["email"] . '">
+    View
+              </a>';
+  }
+
+  echo '</td>
+  </tr>';
+}
+
+echo '</tbody>
+</table>';
+
 
 include("../footer.php");
 ?>

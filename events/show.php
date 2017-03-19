@@ -38,73 +38,72 @@ if(!isset($event)){
   GoBack();
 }
 
-include("../header.php"); ?>
+include("../header.php");
 
-<div class="row">
+echo '<div class="row">
   <div class="col-xs-8">
     <h2><?= $calendar["calendar_name"] ?> - <?= $event["summary"] ?></h2>
   </div>
   <? if(isset($event["event_id"])){ ?>
     <div class="col-xs-4 text-right">
-      <a href="/events/edit.php?calendarId=<?= $calendar["calendar_id"] ?>&eventUid=<?= $event["event_uid"] ?>" class="btn btn-primary">
+      <a href="/events/edit.php?calendarId=' . $calendar["calendar_id"] . '&eventUid=' . $event["event_uid"] . '" class="btn btn-primary">
         Edit
       </a>
       <form action="/events/delete.php" method="post" class="button_to">
-        <input type="hidden" name="event[event_id]" value="<?= $event["event_id"] ?>" />
-        <input type="hidden" name="event[calendar_id]" value="<?= $event["calendar_id"] ?>" />
+        <input type="hidden" name="event[event_id]" value="' . $event["event_id"] .'" />
+        <input type="hidden" name="event[calendar_id]" value="' . $event["calendar_id"] . '" />
         <input type="submit" value="Delete" class="btn btn-danger" />
       </form>
     </div>
-    <? } ?>
-</div>
+</div>';
 
-<dl class="dl-horizontal">
-  <? if(isset($event["event_id"])){ ?>
-    <dt>Event ID</dt>
-    <dd><?= $event["event_id"] ?></dd>
-  <? } ?>
+echo '<dl class="dl-horizontal">';
+  if(isset($event["event_id"])) {
+    echo '<dt>Event ID</dt>
+    <dd>' . $event["event_id"] . '</dd>
 
   <dt>Event UID</dt>
-  <dd><?= $event["event_uid"] ?></dd>
+  <dd>' . $event["event_uid"] . '</dd>
 
   <dt>Summary</dt>
-  <dd><?= $event["summary"] ?></dd>
+  <dd>' . $event["summary"] . '</dd>
 
   <dt>Created</dt>
-  <dd><?= $event["created"] ?></dd>
+  <dd>' . $event["created"] . '</dd>
 
   <dt>Description</dt>
-  <dd><?= $event["description"] ?></dd>
+  <dd>' . $event["description"] . '</dd>
 
   <dt>Start Date</dt>
-  <dd><?= $event["start"] ?></dd>
+  <dd>' . $event["start"] . '</dd>
 
   <dt>End Date</dt>
-  <dd><?= $event["end"] ?></dd>
+  <dd>' . $event["end"] . '</dd>';
 
-<? if(isset($event["location"]["description"])) { ?>
-  <dt>Location</dt>
-  <dd><?= $event["location"]["description"] ?></dd>
-<? } ?>
+    if (isset($event["location"]["description"])) {
+      echo '<dt>Location</dt>
+  <dd>' . $event["location"]["description"] . '</dd>';
+    }
 
-<? if(isset($event["location"]["lat"]) && isset($event["location"]["long"])){ ?>
-    <? if(isset($GLOBALS["GOOGLE_MAPS_EMBED_API_KEY"])) { ?>
-    <dt>Map location</dt>
+    if (isset($event["location"]["lat"]) && isset($event["location"]["long"]))
+      if (isset($GLOBALS["GOOGLE_MAPS_EMBED_API_KEY"])) {
+        echo '<dt>Map location</dt>
     <dd>
       <iframe
       width="600"
       height="450"
       frameborder="0" style="border:0"
-      src="https://www.google.com/maps/embed/v1/place?key=<?= $GLOBALS["GOOGLE_MAPS_EMBED_API_KEY"] ?>
-      &q=<?= $event["location"]["lat"] ?>,<?= $event["location"]["long"] ?>" allowfullscreen>
+      src="https://www.google.com/maps/embed/v1/place?key=' . $GLOBALS["GOOGLE_MAPS_EMBED_API_KEY"] .
+            '&q=' . $event["location"]["lat"] . ',' . $event["location"]["long"] . 'allowfullscreen>
     </iframe>
-    </dl>
-    <? } else { ?>
-    <dt>Latitude, Longitude</dt>
-    <dd><?= $event["location"]["lat"] ?>, <?= $event["location"]["long"] ?></dd>
-    <? } ?>
-  </dd>
-  <? } ?>
-</dl>
+    </dl>';
+      } else {
+        echo '<dt>Latitude, Longitude</dt>
+    <dd>' . $event["location"]["lat"] . ',' . $event["location"]["long"] . '</dd>';
+      }
+    echo '</dd>';
+  }
 
-<?php include("../footer.php"); ?>
+echo '</dl>';
+
+include("../footer.php"); ?>

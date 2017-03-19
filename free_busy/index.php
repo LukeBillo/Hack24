@@ -1,4 +1,5 @@
 <?php
+
 include("../config.php");
 
 $freeBusyInfo = $cronofy->free_busy(Array("tzid" => "Etc/UTC"));
@@ -27,12 +28,12 @@ foreach($freeBusyInfo->each() as $freeBusy){
   array_push($calendars[$calendarId]["free_busy"], $freeBusy);
 }
 
-include("../header.php"); ?>
+include("../header.php");
 
-<h2>Free Busy</h2>
+echo '<h2>Free Busy</h2>';
 
-<? foreach($calendars as $calendarId => $calendar){ ?>
-  <h3><?= $calendar["calendar_name"] ?></h3>
+foreach($calendars as $calendarId => $calendar) {
+  echo '<h3>' . $calendar["calendar_name"] . '</h3>
 
   <table class="table table-striped table-hover">
     <thead>
@@ -43,22 +44,23 @@ include("../header.php"); ?>
       </tr>
     </thead>
 
-    <tbody>
-      <? for($j = 0; $j < count($calendar["free_busy"]); $j++){ ?>
-        <tr>
-          <td>
-            <?= $calendar["free_busy"][$j]["free_busy_status"] ?>
-          </td>
-          <td>
-            <?= $calendar["free_busy"][$j]["start"] ?>
-          </td>
-          <td>
-            <?= $calendar["free_busy"][$j]["end"] ?>
-          </td>
-        </tr>
-      <? } ?>
-    </tbody>
-  </table>
-<? } ?>
+    <tbody>';
 
-<?php include("../footer.php"); ?>
+  for ($j = 0; $j < count($calendar["free_busy"]); $j++) {
+    echo '<tr>
+          <td>
+            ' . $calendar["free_busy"][$j]["free_busy_status"] . '
+          </td>
+          <td>'
+        . $calendar["free_busy"][$j]["start"] .
+        '</td>
+          <td>'
+        . $calendar["free_busy"][$j]["end"] .
+        '</td>
+        </tr>';
+  }
+  echo '</tbody>
+  </table>';
+}
+
+include("../footer.php"); ?>
