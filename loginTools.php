@@ -2,15 +2,11 @@
 
 session_start();
 
+require_once ('common.php');
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = ((isset($_POST['usernameInput'])) ? $_POST['usernameInput'] : '');
     $password = ((isset($_POST['passwordInput'])) ? $_POST['passwordInput'] : '');
-
-    $db = new mysqli('localhost', 'php', 'php', 'hack24');
-
-    if ($db->connect_error) {
-        die("Connection failed: " . $db->connect_error);
-    }
 
     $result = $db->query('select * from users where username = "' . $username . '" and password = "' . $password . '"');
 
