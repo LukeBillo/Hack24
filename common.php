@@ -1,5 +1,9 @@
 <?php
+/**
+ * Scipt for common variables and functions
+ */
 
+//db connection variables
 $host = 'localhost';
 $dbUser = 'php';
 $dbPassword = 'php';
