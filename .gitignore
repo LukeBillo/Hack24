@@ -1,9 +1,6 @@
 .idea/
-<<<<<<< HEAD
 channels/calls
 enterprise_connect/users
 enterprise_connect/push/credentials.json
 log/debug.log
-=======
 .metadata/
->>>>>>> 3824ac8bdf667a381ea34b0d979076ffdbdeea3f
