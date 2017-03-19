@@ -15,38 +15,38 @@ if(isset($_SESSION[$refreshTokenKey])){
   $accessToken = $_SESSION[$accessTokenKey];
   $refreshToken = $_SESSION[$refreshTokenKey];
 } else {
-  if(!isset($GLOBALS['SKIP_AUTH'])){
-    header('Location: ' . $GLOBALS['DOMAIN'] . $loginPath);
-  }
+//  if(!isset($GLOBALS['SKIP_AUTH'])){
+//    header('Location: ' . $GLOBALS['DOMAIN'] . $loginPath);
+//  }
 }
 
 $cronofy = new Cronofy($GLOBALS['CRONOFY_CLIENT_ID'], $GLOBALS['CRONOFY_CLIENT_SECRET'], $accessToken, $refreshToken);
 
-set_exception_handler(function($e){
-  if(is_a($e, "CronofyException")){
-    if($e->getMessage() == "Unauthorized"){
-      if($GLOBALS['cronofy']->refresh_token()){
-        DebugLog("Cronofy access token has been refreshed");
-
-        $_SESSION[$GLOBALS['accessTokenKey']] = $GLOBALS['cronofy']->access_token;
-        $_SESSION[$GLOBALS['refreshTokenKey']] = $GLOBALS['cronofy']->refresh_token;
-
-        header('Refresh:0');
-        die;
-      } else {
-        DebugLog("Cronofy access has been revoked");
-
-        unset($_SESSION[$GLOBALS['accessTokenKey']]);
-        unset($_SESSION[$GLOBALS['refreshTokenKey']]);
-
-        header('Location: ' . $GLOBALS['DOMAIN'] . $loginPath);
-        die;
-      }
-    }
-
-    DebugLog("CronofyException: message=`" . $e->getMessage() . "` error_details=`" . print_r($e->error_details(), true) . "`");
-    throw $e;
-  } else {
-    throw $e;
-  }
-});
+//set_exception_handler(function($e){
+//  if(is_a($e, "CronofyException")){
+//    if($e->getMessage() == "Unauthorized"){
+//      if($GLOBALS['cronofy']->refresh_token()){
+//        DebugLog("Cronofy access token has been refreshed");
+//
+//        $_SESSION[$GLOBALS['accessTokenKey']] = $GLOBALS['cronofy']->access_token;
+//        $_SESSION[$GLOBALS['refreshTokenKey']] = $GLOBALS['cronofy']->refresh_token;
+//
+//        header('Refresh:0');
+//        die;
+//      } else {
+//        DebugLog("Cronofy access has been revoked");
+//
+//        unset($_SESSION[$GLOBALS['accessTokenKey']]);
+//        unset($_SESSION[$GLOBALS['refreshTokenKey']]);
+//
+//        header('Location: ' . $GLOBALS['DOMAIN'] . $loginPath);
+//        die;
+//      }
+//    }
+//
+//    DebugLog("CronofyException: message=`" . $e->getMessage() . "` error_details=`" . print_r($e->error_details(), true) . "`");
+//    throw $e;
+//  } else {
+//    throw $e;
+//  }
+//});

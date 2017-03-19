@@ -44,7 +44,7 @@ echo '<div class="row">
   <dd>' . $channel["callback_url"] . '</dd>
 
   <dt>Only Managed</dt>
-  <dd>' . isset($channel["filters"]["only_managed"]) && $channel["filters"]["only_managed"] ? "True" : "False" . '</dd>';
+  <dd>' . (isset($channel["filters"]["only_managed"]) && $channel["filters"]["only_managed"] ? "True" : "False") . '</dd>';
 
 if(isset($channel["filters"]["calendar_ids"])) {
   echo '<dt>Calendar IDs</dt>

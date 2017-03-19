@@ -3,6 +3,8 @@
  * Scipt for common variables and functions
  */
 
+require_once ('config.php');
+
 //db connection variables
 $host = 'localhost';
 $dbUser = 'php';
