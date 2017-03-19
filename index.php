@@ -5,7 +5,7 @@ include("header.php");
 
 if ($cronofy->access_token == "") {
   echo '<a class="btn btn-primary btn-success" href="/oauth/">
-    Login
+    Connect Google Account
   </a>';
 
 } else {

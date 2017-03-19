@@ -69,35 +69,37 @@ $authUrl = $cronofy->getAuthorizationURL(array(
 $startDate = (new DateTime())->modify('+1 day');
 $endDate = (new DateTime())->modify('+2 day');
 
-include("../header.php"); ?>
+include("../header.php");
 
-<h2>Availability</h2>
+echo '<h2>Availability</h2>
 
-<div class="well">
-  <? if(count($errors) > 0){ ?>
-    <div id="error_explanation" class="alert alert-danger">
-      <ul>
-        <? for($i = 0; $i < count($errors); $i++){ ?>
-          <li><?= $errors[$i] ?></li>
-        <? } ?>
-      </ul>
-    </div>
-  <? } ?>
+<div class="well">';
 
-  <form class="form-horizontal" action="/availability/index.php" method="post">
+if(count($errors) > 0) {
+  echo '<div id="error_explanation" class="alert alert-danger"><ul>';
+
+  for ($i = 0; $i < count($errors); $i++) {
+    echo '<li>' . $errors[$i] . '</li>';
+  }
+
+  echo '</ul>
+    </div>';
+}
+
+echo '<form class="form-horizontal" action="/availability/index.php" method="post">
     <fieldset>
       <div class="form-group">
         <label class="control-label col-lg-2">Account ID 1</label>
         <div class="col-lg-10">
-          <input class="form-control" type="text" name="availabilityInfo[accountId][0]" value="<?= $_POST['availabilityInfo']['accountId'][0] ?? $cronofy->get_account()["account"]["account_id"] ?>" />
+          <input class="form-control" type="text" name="availabilityInfo[accountId][0]" value="' . $_POST['availabilityInfo']['accountId'][0] ?? $cronofy->get_account()['account']['account_id'] . '" />
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label col-lg-2">Account ID 2</label>
         <div class="col-lg-10">
-          <input class="form-control" type="text" name="availabilityInfo[accountId][1]" value="<?= $_POST['availabilityInfo']['accountId'][1] ?? "" ?>" />
-          <span class="help-block">Send someone <a href="<?= $authUrl ?>" target="_blank">this</a> to find their Account ID</span>
+          <input class="form-control" type="text" name="availabilityInfo[accountId][1]" value="' . $_POST['availabilityInfo']['accountId'][1] ?? "" . '" />
+          <span class="help-block">Send someone <a href="' . $authUrl . '" target="_blank">this</a> to find their Account ID</span>
         </div>
       </div>
 
@@ -105,8 +107,15 @@ include("../header.php"); ?>
         <label class="control-label col-lg-2">Required Participants</label>
         <div class="col-lg-10">
           <select name="availabilityInfo[requiredParticipants]" class="form-control">
-            <option <? if(($_POST['availabilityInfo']['requiredParticipants']??"") == "1"){?>selected<?}?>>1</option>
-            <option value="all" <? if(($_POST['availabilityInfo']['requiredParticipants']??"") == "all"){?>selected<?}?>>All</option>
+            <option ';
+          if(($_POST['availabilityInfo']['requiredParticipants']??"") == "1"){ echo 'selected'; }
+
+echo '>1</option>
+            <option value="all"';
+
+if(($_POST['availabilityInfo']['requiredParticipants']??"") == "all"){ echo 'selected'; }
+
+echo '>All</option>
           </select>
         </div>
       </div>
@@ -114,21 +123,21 @@ include("../header.php"); ?>
       <div class="form-group">
         <label class="control-label col-lg-2">Duration (Minutes)</label>
         <div class="col-lg-10">
-          <input type="number" class="form-control" name="availabilityInfo[duration]" value="<?= $_POST['availabilityInfo']['duration'] ?? "60" ?>" />
+          <input type="number" class="form-control" name="availabilityInfo[duration]" value="' . $_POST['availabilityInfo']['duration'] ?? "60" . '" />
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label col-lg-2">Start Time</label>
         <div class="col-lg-10">
-          <input class="form-control" type="datetime-local" name="availabilityInfo[start]" value="<?= $_POST['availabilityInfo']['start'] ?? $startDate->format('Y-m-d\T00:00') ?>" />
+          <input class="form-control" type="datetime-local" name="availabilityInfo[start]" value="' . $_POST['availabilityInfo']['start'] ?? $startDate->format('Y-m-d\T00:00') . '" />
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label col-lg-2">End Time</label>
         <div class="col-lg-10">
-          <input class="form-control" type="datetime-local" name="availabilityInfo[end]" value="<?= $_POST['availabilityInfo']['end'] ?? $endDate->format('Y-m-d\T00:00') ?>" />
+          <input class="form-control" type="datetime-local" name="availabilityInfo[end]" value="<' . $_POST['availabilityInfo']['end'] ?? $endDate->format('Y-m-d\T00:00') . '" />
         </div>
       </div>
 
@@ -139,11 +148,11 @@ include("../header.php"); ?>
       </div>
     </fieldset>
   </form>
-</div>
+</div>';
 
-<? if(ISSET($_POST['availabilityInfo'])) { ?>
-  <? if(count($availablePeriods) > 0){ ?>
-  <table class="table table-striped table-hover">
+if(ISSET($_POST['availabilityInfo'])) {
+  if (count($availablePeriods) > 0) {
+    echo '<table class="table table-striped table-hover">
     <thead>
       <tr>
         <th>Start Time</th>
@@ -152,25 +161,30 @@ include("../header.php"); ?>
       </tr>
     </thead>
 
-    <tbody>
-    <? for($i = 0; $i < count($availablePeriods); $i++){ ?>
-      <tr>
-        <td>
-          <?= $availablePeriods[$i]["start"] ?>
-        </td>
-        <td>
-          <?= $availablePeriods[$i]["end"] ?>
-        </td>
-        <td>
-        <? for($j = 0; $j < count($availablePeriods[$i]["participants"]); $j++){ ?>
-          <?= $availablePeriods[$i]["participants"][$j]["sub"] ?><br />
-          <? } ?>
-        </td>
-      </tr>
-    <? } ?>
-    </tbody>
-  </table>
-  <? } else { ?>
-  No available periods for those options
-  <? } ?>
-<? } ?>
+    <tbody>';
+
+    for ($i = 0; $i < count($availablePeriods); $i++) {
+      echo '<tr>
+        <td>' .
+          $availablePeriods[$i]["start"] .
+          '</td>
+        <td>' .
+          $availablePeriods[$i]["end"] .
+          '</td>
+        <td>';
+
+      for ($j = 0; $j < count($availablePeriods[$i]["participants"]); $j++) {
+        echo $availablePeriods[$i]["participants"][$j]["sub"] . '<br />';
+      }
+
+      echo '</td>
+      </tr>';
+    }
+
+    echo '</tbody>
+  </table>';
+    } else {
+    echo 'No available periods for those options';
+    }
+}
+?>

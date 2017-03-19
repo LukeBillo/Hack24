@@ -25,11 +25,11 @@ echo '<h2>Calendars</h2>';
 foreach($profiles as $profileId => $profile) {
   echo '<div class="row">
     <div class="col-xs-8">
-      <h3><?= $profile["profile_name"] ?></h3>
+      <h3>' . $profile["profile_name"] . '</h3>
     </div>
 
     <div class="col-xs-4 text-right">
-      <a href="/calendars/new.php?profileId=<?= $profileId ?>" class="btn btn-primary">
+      <a href="/calendars/new.php?profileId=' . $profileId .'" class="btn btn-primary">
         New Calendar
       </a>
     </div>
@@ -55,10 +55,10 @@ foreach($profiles as $profileId => $profile) {
               View
             </a>
           </td>
-        </tr>
-    </tbody>
-  </table>';
+        </tr>';
   }
+  echo '</tbody>
+  </table>';
 }
 
 include("../footer.php"); ?>

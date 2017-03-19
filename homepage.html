@@ -5,34 +5,38 @@
     <title>
         homepage
     </title>
+
+    <link rel="stylesheet" href="style/main.css">
 </head>
 
-<body style="background-color: #66CEFF; color: #FFFFFF">
-<h1 style="font-family: Liberation Sans; text-align: center;">
+<body id="home">
+<h1>
     Hello and Welcome to the homepage!
 </h1>
-<div style="text-align: center;"><img style="width: 500px; height: 250px;" alt="insert cat gif here" src="./cat.gif" align="top"><br>
+<div class="container"><img id="cat" alt="insert cat gif here" src="./cat.gif""><br>
 </div>
-<form action="loginTool.php" method="post">
-    <div style="text-align: center; margin-right: 400px; font-weight: bold; font-family: 'Liberation Sans'">
+<form id="login" action="loginTools.php" method="post">
+    <div>
         <label for="usernameInput"> Username: </label>
         <br>
     </div>
-    <div style="text-align: center;">
-        <input style="width: 500px;" name="usernameInput">
+    <div>
+        <input name="usernameInput">
         <br>
     </div>
-    <div style="text-align: center; margin-right: 400px; font-weight: bold; font-family: 'Liberation Sans'">
+    <div>
         <label for="passwordInput"> Password: </label>
         <br>
     </div>
-    <div style="text-align: center;">
-        <input style="width: 500px;" name="passwordInput" type="password">
+    <div>
+        <input>
         <br>
     </div>
-    <div style="text-align: center;">
+    <div>
         <button type="submit">LOGIN</button>
     </div>
 </form>
+
+<button id="register" href="register.php">Register</button>
 </body>
 </html>

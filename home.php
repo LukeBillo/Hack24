@@ -9,7 +9,7 @@
 session_start();
 
 if (isset($_SESSION['loggedIn']) and $_SESSION['loggedIn'] == true) {
-    echo "Home page";
+    header('Location: index.php');
 } else {
-    header('Location: /hack24/homepage.html');
+    header('Location: homepage.html');
 }

@@ -14,8 +14,10 @@ $cronofy->request_token(array("code" => $_GET['code'], "redirect_uri" => $GLOBAL
   header('Location: ' . $authUrl);
 }
 
-include("../header.php"); ?>
+include("../header.php");
 
-<p>Your account ID is:</p>
-<pre><code><?= $cronofy->get_account()["account"]["account_id"] ?></code></pre>
-<p>In order to get another user's account ID, ask them to visit this URL, follow the authentication flow and let you know what account ID is displayed:</p><a href="<?= $authUrl ?>"><?= $authUrl ?></a>
+echo '<p>Your account ID is:</p>
+<pre><code>' . $cronofy->get_account()["account"]["account_id"] . '</code></pre>
+<p>In order to get another user&apos;s account ID, ask them to visit this URL, follow the authentication flow and let you know what account ID is displayed:</p>
+<a href="' . $authUrl . '</a>';
+?>
